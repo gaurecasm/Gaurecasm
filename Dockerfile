@@ -10,9 +10,13 @@ ENV PYTHONUNBUFFERED 1
 # Install dependency to create a requiremnets .txt
 COPY ./requirements.txt /requirements.txt 
 
+RUN apk add --update --no-cache postgres-client
+RUN apk add --update --no-cache --virtual .tmp-build-deps \
+        gcc libc-dev linux-headers postgres-dev
 # now install dependency in iso
 RUN pip install -r /requirements.txt
 
+RUN apk .tmp-build-deps
 # create a  director to store all the our system and all files into
 RUN mkdir /app
 WORKDIR /app
