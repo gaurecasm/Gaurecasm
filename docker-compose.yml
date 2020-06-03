@@ -1,0 +1,15 @@
+# which vereison we are gonnnau use
+version: "3"
+
+# which services we are g onnna user tint he project
+
+services: 
+    app:
+        build: 
+            context: .
+        ports: 
+            - "8000:8000"
+        volumes: 
+            - ./app:/app
+        command: >
+            sh -c "python manange.py runserver 0.0.0.0:8000"
